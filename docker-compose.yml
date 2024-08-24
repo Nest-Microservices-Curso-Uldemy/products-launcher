@@ -51,3 +51,23 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
+
+  # =========================
+  # Payments Microservice
+  # =========================
+
+  payments-ms:
+    container_name: payments-ms
+    build: ./payments-ms
+    volumes:
+      - ./payments-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    ports:
+      - "${PAYMENTS_MS_PORT}:${PAYMENTS_MS_PORT}"
+    environment:
+      - PORT=${PAYMENTS_MS_PORT}
+      - NATS_SERVERS=nats://nats-server:4222
+      - STRIPE_SECRET=${PAYMENTS_STRIPE_SECRET}
+      - STRIPE_SUCCESS_URL=${PAYMENTS_STRIPE_SUCCESS_URL}
+      - STRIPE_CANCEL_URL=${PAYMENTS_STRIPE_CANCEL_URL}
+      - STRIPE_ENDPOINT_SECRET=${PAYMENTS_STRIPE_ENDPOINT_SECRET}
