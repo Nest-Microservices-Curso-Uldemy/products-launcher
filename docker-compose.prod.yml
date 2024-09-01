@@ -5,7 +5,7 @@ services:
     image: nats:latest
 
   client-gateway:
-    image: client-gateway-prod
+    image: europe-southwest1-docker.pkg.dev/microservicios-dev-434019/img-registro-ms/client-gateway
     build:
       context: ./client-gateway
       dockerfile: dockerfile.prod
@@ -16,7 +16,7 @@ services:
       - NATS_SERVERS=nats://nats-server:4222
 
   auth-ms:
-    image: auth-ms-prod
+    image: europe-southwest1-docker.pkg.dev/microservicios-dev-434019/img-registro-ms/auth-ms
     build:
       context: ./auth-ms
       dockerfile: dockerfile.prod
@@ -27,7 +27,7 @@ services:
       - JWT_SECRET=${JWT_SECRET}
 
   products-ms:
-    image: products-ms-prod
+    image: europe-southwest1-docker.pkg.dev/microservicios-dev-434019/img-registro-ms/products-ms
     build:
       context: ./products-ms
       dockerfile: dockerfile.prod
@@ -37,7 +37,7 @@ services:
       - DATABASE_URL=file:./dev.db
 
   payments-ms:
-    image: payments-ms-prod
+    image: europe-southwest1-docker.pkg.dev/microservicios-dev-434019/img-registro-ms/payments-ms
     build:
       context: ./payments-ms
       dockerfile: dockerfile.prod
@@ -52,7 +52,7 @@ services:
       - STRIPE_ENDPOINT_SECRET=${PAYMENTS_STRIPE_ENDPOINT_SECRET}
 
   orders-ms:
-    image: orders-ms-prod
+    image: europe-southwest1-docker.pkg.dev/microservicios-dev-434019/img-registro-ms/orders-ms
     build:
       context: ./orders-ms
       dockerfile: dockerfile.prod
